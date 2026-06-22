@@ -1,0 +1,297 @@
+/* Material-inspired dark-blue theme + responsive layout */
+:root{
+  /* changed: darker page background and softer text color */
+  --bg: #01081a;               /* darker background */
+  --surface:#0f2848;
+  --card: #000;                /* card background (black) */
+  --card-text: #e6ecf5;        /* softer/greyish text */
+  --primary:#1e88e5;
+  --on-primary:#fff;
+  --muted:#8fa8bf;             /* slightly adjusted muted color */
+  --radius:12px;
+  --elevation:0 6px 18px rgba(2,6,23,0.45);
+  --max-width:1100px;
+  --gap:20px;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* changed: lighter electric blue for header titles and URLs */
+  --electric: #7AD8FF; /* lighter blue */
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:linear-gradient(180deg,var(--bg),#011224 120%); /* darker */
+  color:var(--text, var(--card-text)); /* use softer grey text */
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding-top:64px;
+  display:flex;
+  justify-content:center;
+  font-size:16px;
+  line-height:1.4;
+}
+/* App container */
+.container{
+	/* reverted: remove black background and border-radius added earlier */
+	width:100%;
+	max-width:var(--max-width);
+	padding:24px;
+}
+/* ensure direct children inherit readable color */
+.container h1,.container h2,.container h3,.container p,.container li{ color:#fff; }
+
+/* Top app bar */
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:64px;
+  background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  backdrop-filter: blur(6px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:var(--elevation);
+  z-index:60;
+}
+.topbar-inner{
+  width:100%;
+  max-width:var(--max-width);
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:8px 16px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--card);
+  text-decoration:none;
+  font-weight:600;
+  font-size:1.25rem; /* was 1.1rem */
+}
+.brand .logo{
+  /* keep logo zone size but show more of the image inside it */
+  background: #fff;
+  padding: 4px; /* reduced from 6px so the image occupies more space */
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+}
+.brand .logo img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:8px;
+  transform: scale(1.06); /* slightly enlarge the image inside the box */
+  transform-origin: center;
+}
+/* header text in topbar */
+.topbar,
+.topbar .brand,
+.topbar .brand a,
+.topbar .nav a,
+.topbar .menu-toggle {
+  color: var(--electric) !important;
+}
+/* keep logo foreground as originally intended */
+.topbar .brand .logo {
+  color: var(--on-primary) !important;
+}
+
+/* nav */
+.nav{
+  margin-left:auto;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.nav a{
+  color:var(--card);
+  text-decoration:none;
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:600;
+  opacity:0.95;
+}
+.nav a:hover{background:rgba(255,255,255,0.03);}
+
+/* mobile menu */
+.menu-toggle{
+  display:none;
+  margin-left:auto;
+  background:transparent;
+  border:0;
+  color:var(--card);
+  font-size:1.6rem;
+}
+.mobile-nav{
+  display:none;
+  flex-direction:column;
+  gap:8px;
+  margin-top:8px;
+}
+.mobile-nav.open{display:flex}
+
+/* content cards */
+.hero{
+  display:flex;
+  gap:var(--gap);
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:24px;
+}
+.card{
+  background: var(--card, #000);
+  color: var(--card-text, #e6ecf5);
+  border-radius:var(--radius);
+  box-shadow:var(--elevation);
+  padding:18px;
+  background-clip: padding-box;
+  transition: box-shadow 180ms ease, transform 160ms ease;
+}
+.card p{color:#123257}
+
+/* ensure headings, paragraphs and list items inside cards are white */
+.card h1, .card h2, .card h3, .card p, .card li { color: var(--card-text, #e6ecf5); }
+
+/* cards grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:var(--gap);
+}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+
+/* buttons */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--primary);
+  color:var(--on-primary);
+  padding:10px 14px;
+  border-radius:10px;
+  border:0;
+  text-decoration:none;
+  font-weight:700;
+  box-shadow:0 6px 16px rgba(30,136,229,0.28);
+}
+.btn.ghost{
+  background:transparent;
+  color:var(--card);
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:none;
+}
+.btn.ghost, .btn.ghost * { color: #fff; }
+
+/* footer */
+.footer{
+  margin-top:30px;
+  padding:18px;
+  color:var(--muted);
+  text-align:center;
+  font-size:0.95rem;
+}
+
+/* small screens topbar adjustments */
+@media (max-width:760px){
+  .nav{display:none}
+  .menu-toggle{display:inline-flex}
+  body{padding-top:56px}
+  .topbar{height:56px}
+  .topbar-inner{padding:6px 12px}
+}
+
+/* utility */
+.small{font-size:0.95rem;color:var(--muted)}
+.center{display:flex;align-items:center;justify-content:center}
+
+/* WP block classes */
+.post-content{
+  background:transparent; /* keep card background black, content itself transparent */
+  color: var(--card-text, #e6ecf5);
+  font-size:0.98rem;
+  line-height:1.55;
+}
+.post-content .wp-block-heading{ color:var(--card-text, #e6ecf5); margin-top:1rem; margin-bottom:0.5rem; font-weight:600; }
+.post-content .wp-block-list{ margin:0.6rem 0 1rem 1.2rem; padding:0; }
+.post-content .wp-block-list li{ margin:0.4rem 0; color:var(--card-text, #e6ecf5) }
+.post-content a{ color:var(--primary); text-decoration:underline; }
+
+/* make site URLs use the header electric blue */
+a,
+.post-content a,
+.card a,
+.grid a,
+.container a,
+.nav a {
+  color: var(--electric) !important;
+  text-decoration: none;
+}
+
+a:visited,
+.post-content a:visited,
+.card a:visited,
+.grid a:visited,
+.container a:visited,
+.nav a:visited {
+  color: var(--electric);
+  opacity: 0.9;
+}
+
+a:hover,
+a:focus,
+.post-content a:hover,
+.card a:hover,
+.grid a:hover,
+.container a:hover,
+.nav a:hover {
+  color: var(--electric);
+  text-decoration: underline;
+  filter: brightness(1.06);
+}
+
+/* apply the same visual frame to injected WP/UAG containers and post content blocks */
+.wp-block-uagb-container,
+.uagb-container-inner-blocks-wrap,
+.post-content,
+.uagb-block-95c1881f,
+.uagb-block-135427ab {
+	border: 1px solid var(--card-outline);
+	border-radius: calc(var(--radius) - 4px);
+	padding: 12px;
+	background: transparent;
+}
+
+/* white separator used between injected blocks */
+.white-sep,
+hr.white-sep {
+  height: 1px;
+  background: rgba(255,255,255,0.95);
+  border: none;
+  margin: 18px 0;
+  width: 100%;
+  display: block;
+}
+
+/* Center cover images inside cards */
+.card img{
+  display:block;
+  margin:12px auto 0;
+}
+
+/* Center headings and paragraphs inside cards */
+.card h3,
+.card p {
+  text-align: center;
+}
