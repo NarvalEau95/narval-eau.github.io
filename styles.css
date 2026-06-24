@@ -136,8 +136,22 @@ body{
 .mobile-nav{
   display:none;
   flex-direction:column;
-  gap:8px;
-  margin-top:8px;
+  gap:4px;
+  margin-top:4px;
+  width: 130px;
+  z-index: 100;
+  position: fixed;
+  top: 0px;
+  right: 50px;
+}
+.mobile-nav a{
+  color:var(--card);
+  text-decoration:none;
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:600;
+  opacity:0.95;
+  background:rgba(255, 255, 255, 0.1);
 }
 .mobile-nav.open{display:flex}
 
